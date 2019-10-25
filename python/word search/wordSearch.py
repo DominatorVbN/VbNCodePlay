@@ -1,11 +1,11 @@
-# Python3 program for searing a word in a matrix of letters in all directions.
+# Python3 program for searching a word in a matrix of letters in all directions.
 
 
 def direction(l, row, column, word, length, d1, d2):
 
     i = 1
 
-    # Checking the word in the perticular direction
+    # Checking the word in the particular direction
 
     def fun(l, row, column, word, i, length, d1, d2):
         str = l[row+d1]
@@ -17,14 +17,14 @@ def direction(l, row, column, word, length, d1, d2):
             return True
         else: return fun(l, row+d1, column+d2, word, i+1, length, d1, d2)
 
-    # checking direction and whether the word is in limit or not for perticular direction
+    # checking direction and whether the word is in the limit or not for particular direction
 
     if (d1 == -1 and d2 == 0):                                          # For top direction
         if not (row>=length-1): 
             return False
         return fun(l, row, column, word, i, length, d1, d2)
 
-    if (d1 == 1 and d2 == 0):                                           # For bottem direction
+    if (d1 == 1 and d2 == 0):                                           # For bottom direction
         if not ((row+length)<=len(l)): 
             return False
         return fun(l, row, column, word, i, length, d1, d2)
@@ -73,7 +73,7 @@ while True:
     else:
         break
 
-# Set derection
+# Set direction
 direction1 = [-1,1,0,0,-1,-1,1,1]
 direction2 = [0,0,1,-1,-1,1,-1,1]
 

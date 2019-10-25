@@ -5,7 +5,7 @@ def direction(l, row, column, word, length, d1, d2):
 
     i = 1
 
-    # Checking the word in the perticular direction
+    # Checking the word in the particular direction
 
     def fun(l, row, column, word, i, length, d1, d2):
         str = l[row+d1]

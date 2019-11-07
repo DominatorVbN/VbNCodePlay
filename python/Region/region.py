@@ -1,4 +1,4 @@
-# This is the code for finding the region of army and contested area for a perticular problem
+# This is Python3 code for finding the region of army and contested area for a particular problem
 
 class area:
 
@@ -13,11 +13,10 @@ class area:
     Square = []
 
     # Initializing Values
-    def __init__(self, row, column, data, case):
+    def __init__(self, row, column, data):
         self.row = row
         self.column = column
         self.data = data
-        self.case = case
         self.regions()
         self.give(area.region)
 
@@ -42,7 +41,7 @@ class area:
                 print(key,":",value)
         print("Contested:",contest)
 
-    # Finding reagions
+    # Finding regions
     def regions(self):
         for area.i in range(self.row):
 
@@ -111,7 +110,7 @@ class area:
         else:
             return False
 
-    # check for the character in perticular direction
+    # check for the character in particular direction
     def boolValue(self, x, y):
         return [bool([area.i+x,area.j+y] not in area.groundVisited)
             ,bool(self.data[area.i+x][area.j+y] != "#" )]
@@ -158,7 +157,7 @@ try:
         row = int(inputData[0])                             # Row of test case
         column = int(inputData[1])                          # Column of test case
         print("Case :",loop)
-        area(row, column, data, loop)                       # Starting class
+        area(row, column, data)                             # Starting class
         del inputData[0:int(inputData[0])+2]                # Deleting input
 
 except:

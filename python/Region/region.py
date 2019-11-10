@@ -1,24 +1,23 @@
-# This is Python3 code for finding the region of army and contested area for a particular problem
+# This is the code for finding the region of army and contested area for a perticular problem
 
 class area:
 
-    # Class variables
-    num = 0
-    i = 0
-    j = 0
-    region = []
-    visited = []
-    groundVisited = []
-    present = []
-    Square = []
-
     # Initializing Values
-    def __init__(self, row, column, data):
+    def __init__(self, row, column, data, case):
+        self.num = 0
+        self.i = 0
+        self.j = 0
+        self.region = []
+        self.visited = []
+        self.groundVisited = []
+        self.present = []
+        self.Square = []
         self.row = row
         self.column = column
         self.data = data
+        self.case = case
         self.regions()
-        self.give(area.region)
+        self.give(self.region)
 
     # Show the values
     def give(self,region):
@@ -41,46 +40,45 @@ class area:
                 print(key,":",value)
         print("Contested:",contest)
 
-    # Finding regions
+    # Finding reagions
     def regions(self):
-        for area.i in range(self.row):
+        for self.i in range(self.row):
 
-            for area.j in range(self.column):
+            for self.j in range(self.column):
 
-                if not [area.i,area.j] in area.visited:
-                    area.visited.append([area.i,area.j])
+                if not [self.i,self.j] in self.visited:
+                    self.visited.append([self.i,self.j])
                     
-                    if self.data[area.i][area.j].isalpha():
-                        area.current = [area.i,area.j]
-                        area.region.append([])
+                    if self.data[self.i][self.j].isalpha():
+                        self.current = [self.i,self.j]
+                        self.region.append([])
                         self.addArea()
                         way = self.paths()
 
                         while(way):
                             if(len(way)>1):
-                                area.Square.append([area.i,area.j])
+                                self.Square.append([self.i,self.j])
                             self.go(way[0]) 
                             way = self.paths()
-
-                        while(area.Square):
-                            a, b = area.Square[0][0], area.Square[0][1]
-                            area.i,area.j = a, b
+                        while(self.Square):
+                            a, b = self.Square[0][0], self.Square[0][1]
+                            self.i,self.j = a, b
                             way = self.paths()
 
                             while(way):
                                 if(len(way)>1):
-                                    area.Square.append([area.i,area.j])
+                                    self.Square.append([self.i,self.j])
                                 self.go(way[0])
                                 way = self.paths()
 
-                            area.Square.remove([a,b])
+                            self.Square.remove([a,b])
 
-                        area.visited = area.visited+area.groundVisited
-                        area.groundVisited = []
-                        area.Square = []
-                        area.i = area.current[0]
-                        area.j = area.current[1]
-                        area.num+=1
+                        self.visited = self.visited+self.groundVisited
+                        self.groundVisited = []
+                        self.Square = []
+                        self.i = self.current[0]
+                        self.j = self.current[1]
+                        self.num+=1
 
     # returning the directions for a position
     def paths(self):
@@ -96,45 +94,46 @@ class area:
 
     # returning the bool values
     def position(self, string, x, y):
-        if(string=="right" and area.j < self.column - 1):
+        if(string=="right" and self.j < self.column - 1):
             return self.boolValue(x, y)
 
-        elif(string=="down" and area.i < self.row - 1):
+        elif(string=="down" and self.i < self.row - 1):
             return self.boolValue(x, y)
 
-        elif(string=="left" and area.j > 0):
+        elif(string=="left" and self.j > 0):
             return self.boolValue(x, y)
 
-        elif(string=="up" and area.i > 0):
+        elif(string=="up" and self.i > 0):
             return self.boolValue(x, y)
         else:
             return False
 
-    # check for the character in particular direction
+    # check for the character in perticular direction
     def boolValue(self, x, y):
-        return [bool([area.i+x,area.j+y] not in area.groundVisited)
-            ,bool(self.data[area.i+x][area.j+y] != "#" )]
+        return [bool([self.i+x,self.j+y] not in self.groundVisited)
+            ,bool(self.data[self.i+x][self.j+y] != "#" )]
     
 
     # adding the region value 
     def addArea(self):
-        area.region[area.num].append(data[area.i][area.j])
-        area.groundVisited.append([area.i,area.j])
+        #stores the position in region list
+        self.region[self.num].append(data[self.i][self.j])
+        self.groundVisited.append([self.i,self.j])
 
     # Changing direction
     def go(self,direction):
         if(direction==1): 
-            area.j = area.j+1 
+            self.j = self.j+1 
         elif(direction==2): 
-            area.i = area.i+1 
+            self.i = self.i+1 
         elif(direction==3): 
-            area.j = area.j-1
+            self.j = self.j-1
         elif(direction==4): 
-            area.i = area.i-1
+            self.i = self.i-1
         self.addArea()
 
 # Taking Input For test cases
-testCases = int(input("Type the no. of test cases(Double enter to exit) : "))
+testCases = int(input("Type the no. of test cases(Double enter to exit) : ") or "100")
 
 
 # If you want to add your own file then use this
@@ -150,15 +149,15 @@ while True:
         break
 
 # Finding answers
+
 try:
     for loop in range(1,testCases+1):                       # Loop for test cases
-
-        data = inputData[2 : int(inputData[0]) + 2]         # Taking first test case for input
         row = int(inputData[0])                             # Row of test case
         column = int(inputData[1])                          # Column of test case
+        data = inputData[2 : int(inputData[0]) + 2]         # Taking first test case for input                       
         print("Case :",loop)
-        area(row, column, data)                             # Starting class
-        del inputData[0:int(inputData[0])+2]                # Deleting input
+        region = area(row, column, data, loop)              # Starting class
+        del inputData[0:row+2]                              # Deleting input
 
 except:
 

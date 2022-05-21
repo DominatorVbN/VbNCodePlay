@@ -26,3 +26,7 @@ var redShirtHeights = [5, 8, 1, 3, 4]
 var blueShirtHeights = [6, 9, 2, 4, 5]
 
 print(Program().classPhotos(&redShirtHeights, &blueShirtHeights))
+
+for i in stride(from: 1.0, to: 9.0, by: 0.1) {
+    print(i)
+}
